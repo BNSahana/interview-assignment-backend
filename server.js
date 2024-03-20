@@ -10,8 +10,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// MongoDB Compass connection URI
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/assignment';
+// MongoDB Atlas connection URI
+const MONGODB_URI = process.env.MONGODB_URL;
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -28,7 +28,8 @@ const codeSnippetSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now }
 });
 
-const CodeSnippet = mongoose.model('CodeSnippet', codeSnippetSchema);
+const CodeSnippet = mongoose.model('CodeSnippet', codeSnippetSchema, 'task');
+
 
 app.get("/app/check", (req, res) => {
   res.json({
