@@ -2,22 +2,21 @@ require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import cors middleware
+const cors = require('cors'); 
 
 const app = express();
 
-app.use(cors()); // Enable CORS for all routes
+app.use(cors()); 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// MongoDB Atlas connection URI
+
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("DB connection is successful"))
   .catch((error) => console.log("DB connection is unsuccessful", error));
 
-// Define schema for code snippets
 const codeSnippetSchema = new mongoose.Schema({
   username: String,
   language: String,
